@@ -9,4 +9,5 @@
 6-firstdirectory : creates a directory
 7-movethatfile : Move the file 
 8-firstdelete : Delete the file
+9-firstdirdeletion : Delete the directory
  
