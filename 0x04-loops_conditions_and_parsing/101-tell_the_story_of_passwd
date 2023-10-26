@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Displays the contents of the file `/etc/passwd`.
+# Only displays the username, user id, and user home directory path.
+
+while IFS= read -r line;
+do
+	USERNAME="$(echo "$line" | cut -d":" -f1)"
+	GROUP_ID="$(echo "$line" | cut -d":" -f4)"
+	HOME_DIRECTORY="$(echo "$line" | cut -d":" -f6)"
+	COMMAND="$(echo "$line" | cut -d":" -f7)"
+	USERID="$(echo "$line" | cut -d":" -f3)"
+	PASSWORD="$(echo "$line" | cut -d":" -f2)"
+	USERIDINFO="$(echo "$line" | cut -d":" -f5)"
+	echo "The user $USERNAME is part of the $GROUP_ID gang, lives in $HOME_DIRECTORY and rides $COMMAND. $USERID's place is protected by the passcode $PASSWORD, more info about the user here: $USERIDINFO" 
+done < "/etc/passwd"
