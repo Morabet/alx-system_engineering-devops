@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Bash script that displays its own PID
+
+# pgrep -f "$0" displays its own PID.
+
+echo $$
