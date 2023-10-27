@@ -13,7 +13,7 @@ fi
 if [ "$1" == "start" ]
 then
 	./$file &
-	pgrep -f manage_my_process > $filepid
+	echo $! > $filepid
 	echo "manage_my_process started"
 fi
 
@@ -28,6 +28,6 @@ then
 	pkill -f ./$file
 	rm $filepid
 	./$file &
-	pgrep -f manage_my_process > $filepid
+	echo $! > $filepid
 	echo "manage_my_process restarted"
 fi
