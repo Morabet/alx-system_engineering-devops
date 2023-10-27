@@ -21,7 +21,7 @@ if [ "$1" == "stop" ]
 then
 	pkill -f ./$file 
 	rm $filepid
-	echo "manage_my_process stop"
+	echo "manage_my_process stopped"
 fi
 if [ "$1" == "restart" ]
 then
