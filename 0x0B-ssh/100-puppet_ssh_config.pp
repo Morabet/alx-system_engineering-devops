@@ -1,13 +1,13 @@
 # sets up a client SSH configuration file so that we can connect to a server without using a password
 
-file { 'passwd auth':
-  ensure => present,
-  path   => '~/.ssh/school',
+file_line { 'passwd_auth':
+  ensure => 'present',
+  path   => '/etc/ssh/ssh_config',
   line   => '    PasswordAuthentication no',
 }
 
-file { 'identity file':
-  ensure => present,
-  path   => '~/.ssh/school',
+file_line { 'identity_file':
+  ensure => 'present',
+  path   => '/etc/ssh/ssh_config',
   line   => '     IdentityFile ~/.ssh/school',
 }
