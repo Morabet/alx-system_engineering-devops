@@ -1,3 +1,5 @@
+# To install & configure nginx on a server using Puppet
+
 $configure = "server {
 
         listen 80 default_server;
