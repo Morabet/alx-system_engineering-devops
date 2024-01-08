@@ -1,35 +1,18 @@
 # Create a custom header with puppet
 
-$configure = "server {
-
-        listen 80 default_server;
-        listen [::]:80 default_server;
-
-        root /var/www/html;
-
-        index index.html index.htm index.nginx-debian.html;
-	
-	# Add a custom header
-        add_header X-Served-By '$HOSTNAME';
-
-        server_name _;
-
-	location / {
-                try_files \$uri \$uri/ =404;
-        }
-
-}"
-
-package { 'nginx':
-ensure  => 'installed',
+exec {'install Nginx':
+  provider => shell,
+  command  => 'sudo apt-get -y install nginx',
+  before   => Exec['add_header'],
 }
 
-
-file { '/etc/nginx/sites-available/default':
-ensure  => 'present',
-content => $configure
+exec { 'add_header':
+  provider => shell,
+  command  => sudo sed -i "/listen 80 default_server;/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-available/default,
+  before   => Exec['restart Nginx'],
 }
 
-exec { 'service nginx restart':
-path    => ['/usr/sbin', '/usr/bin']
+exec { 'restart Nginx':
+  provider => shell,
+  command  => 'sudo service nginx restart',
 }
