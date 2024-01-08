@@ -10,7 +10,7 @@ $configure = "server {
         index index.html index.htm index.nginx-debian.html;
 	
 	# Add a custom header
-        add_header X-Served-By '${hostname}';
+        add_header X-Served-By '$HOSTNAME';
 
         server_name _;
 
