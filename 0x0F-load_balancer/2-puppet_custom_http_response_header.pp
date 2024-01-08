@@ -10,8 +10,7 @@ $configure = "server {
         index index.html index.htm index.nginx-debian.html;
 	
 	# Add a custom header
-        add_header X-Served-By $HOSTNAME;
-
+        add_header X-Served-By '${hostname}';
 
         server_name _;
 
@@ -19,30 +18,18 @@ $configure = "server {
                 try_files \$uri \$uri/ =404;
         }
 
-        location /redirect_me {
-                return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-        }
-
-        error_page 404 /404.html;
-        location = /404.html {
-                internal;
-        }
 }"
 
 package { 'nginx':
-ensure	=> 'installed',
+ensure  => 'installed',
 }
 
-file { '/var/www/html/index.html':
-ensure	=> 'present',
-content	=> 'Hello World!'
-}
 
 file { '/etc/nginx/sites-available/default':
-ensure	=> 'present',
+ensure  => 'present',
 content => $configure
 }
 
 exec { 'service nginx restart':
-path	=> ['/usr/sbin', '/usr/bin']
+path    => ['/usr/sbin', '/usr/bin']
 }
