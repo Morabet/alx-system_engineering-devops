@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# A script that displays domain dns informations for a domain
+
+info () {
+    answer_section=$(dig "$1" | grep -A1 'ANSWER SECTION' | tail -n 1)
+
+    sub=$(echo "$answer_section" | awk '{print $1;}' FS=.)
+    rec=$(echo "$answer_section" | awk '{print $4;}')
+    ip_add=$(echo "$answer_section" | awk '{print $5}')
+
+    echo "The subdomain $sub is a $rec record and points to $ip_add"
+}
+
+if [ $# -eq 1 ]
+then
+    info "www.$1"
+    info "lb-01.$1"
+    info "web-01.$1"
+    info "web-02.$1"
+elif [ $# -eq 2 ]
+then
+    info "$2.$1"
+fi
