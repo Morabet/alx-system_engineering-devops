@@ -2,9 +2,9 @@
 """ Script to export data in the CSV format"""
 
 import csv
-from sys import argv
 import json
 import requests
+from sys import argv
 
 
 def get_todos(user_id):

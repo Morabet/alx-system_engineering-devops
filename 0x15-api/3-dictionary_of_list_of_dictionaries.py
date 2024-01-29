@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """ Script to get information about employee"""
 
-from sys import argv
 import json
 import requests
+from sys import argv
 
 
 def get_todos():

@@ -4,9 +4,9 @@ for a given employee ID,
 returns information about his/her TODO list progress
 """
 
-from sys import argv
 import json
 import requests
+from sys import argv
 
 
 def get_todos(user_id):
